@@ -1,0 +1,87 @@
+{
+    "name": "beercms/edit-lock",
+    "description": "Generic edit locking for BeersCMS and PHP 8.1+ applications with immutable DTOs and race-safe storage.",
+    "type": "library",
+    "keywords": [
+        "php",
+        "php-8.1",
+        "edit-lock",
+        "locking",
+        "concurrency",
+        "lease",
+        "resource-lock",
+        "beercms"
+    ],
+    "homepage": "https://github.com/johnnyxlemonade/beercms-edit-lock",
+    "readme": "README.md",
+    "support": {
+        "issues": "https://github.com/johnnyxlemonade/beercms-edit-lock/issues",
+        "source": "https://github.com/johnnyxlemonade/beercms-edit-lock"
+    },
+    "license": "proprietary",
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BeersCms\\EditLock\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BeersCms\\EditLock\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "@php bin/lint.php",
+        "composer:validate": "@composer validate --strict",
+        "test": "@php vendor/bin/phpunit",
+        "test:ci": "@php vendor/bin/phpunit --colors=always",
+        "stan": "@php vendor/bin/phpstan analyse --memory-limit=4G",
+        "stan:ci": "@php vendor/bin/phpstan analyse --no-progress --error-format=github --memory-limit=4G",
+        "cs:check": "@php vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
+        "cs:fix": "@php vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "qa": [
+            "@cs:check",
+            "@stan",
+            "@test"
+        ],
+        "check:platform": "@composer check-platform-reqs",
+        "check": [
+            "@composer:validate",
+            "@check:platform",
+            "@lint",
+            "@qa"
+        ]
+    },
+    "scripts-descriptions": {
+        "lint": "Check PHP syntax for source files and tests.",
+        "composer:validate": "Validate composer.json in strict mode.",
+        "test": "Run the PHPUnit test suite.",
+        "test:ci": "Run the PHPUnit test suite with CI-friendly output.",
+        "stan": "Run PHPStan static analysis.",
+        "stan:ci": "Run PHPStan with GitHub Actions output.",
+        "cs:check": "Check coding standards using PHP CS Fixer without modifying files.",
+        "cs:fix": "Fix coding standards using PHP CS Fixer.",
+        "qa": "Run coding standards, static analysis, and the PHPUnit test suite.",
+        "check:platform": "Check installed platform requirements.",
+        "check": "Run full package validation."
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "classmap-authoritative": false,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "notify-on-install": false
+    }
+}
